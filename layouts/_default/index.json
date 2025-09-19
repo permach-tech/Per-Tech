@@ -1,0 +1,23 @@
+{{- if .Site.Params.search -}}
+    {{- $index := slice -}}
+    {{- $pages := .Site.RegularPages -}}
+    {{- if .Site.Params.hiddenFromSearch -}}
+        {{- $pages = where $pages "Params.hiddenfromsearch" false -}}
+    {{- else -}}
+        {{- $pages = where $pages "Params.hiddenfromsearch" "!=" true -}}
+    {{- end -}}
+    {{- range $pages -}}
+        {{- $index = $index | append (dict 
+            "title" .Title
+            "url" .RelPermalink
+            "content" (.Plain | htmlUnescape | truncate 500)
+            "summary" .Summary
+            "date" (.Date.Format "2006-01-02")
+            "tags" .Params.tags
+            "categories" .Params.categories
+        ) -}}
+    {{- end -}}
+    {{- $index | jsonify | safeJS -}}
+{{- else -}}
+    []
+{{- end -}}
