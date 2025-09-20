@@ -130,6 +130,9 @@ theme = "DoIt"
   Linkedin = "persell-machuca"
 
 [params.page]
+  enableWordCount = false
+  enableReadingTime = true
+  enableLastMod = false
   # Enable cover image on post pages
   showImage = true
   # Custom CSS library config
