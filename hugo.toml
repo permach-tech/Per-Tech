@@ -1,4 +1,4 @@
-    noClasses = false
+noClasses = false
 version = 3
 baseURL = "http://192.168.40.13:1313"
 defaultContentLanguage = "en"
@@ -9,6 +9,8 @@ theme = "DoIt"
 
 [params]
   version = "0.4.X"
+  # Date format for posts (without "published on" prefix)
+  dateformat = "January 2, 2006"
   # Image processing configuration
   [params.image]
     # Enable image optimization
@@ -133,7 +135,7 @@ theme = "DoIt"
   # Custom CSS library config
   [params.page.library]
     [params.page.library.css]
-      custom = "css/custom.css"
+      custom = "css/_override.scss"
 
 [params.page.code]
   # the maximum number of lines of displayed code by default

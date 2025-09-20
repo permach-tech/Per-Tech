@@ -1,0 +1,12 @@
+[publishedOnDate]
+other = "{{ .Date }}"
+
+[includedIn]
+other = ""
+
+[includedInCategories]
+one = "{{ .Categories }}"
+other = "{{ .Categories }}"
+
+[author]
+other = ""
