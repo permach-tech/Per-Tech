@@ -35,3 +35,33 @@ In this post, we will discuss and compare the 3 Azure Automation services: Azure
 Now let's take a simple example scenario of each service to illustrate their use cases.
 For this example we will get a user a using Microsoft Graph API.
 
+### Azure Runbook
+```powershell
+
+# Get System Assigned Managed Identity Access Token
+$url = $env:IDENTITY_ENDPOINT  
+$headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]" 
+$headers.Add("X-IDENTITY-HEADER", $env:IDENTITY_HEADER) 
+$headers.Add("Metadata", "True") 
+$body = @{resource='https://graph.microsoft.com/' } 
+$token = Invoke-RestMethod $url -Method 'POST' -Headers $headers -ContentType 'application/x-www-form-urlencoded' -Body $body 
+$accessToken = $token.access_token
+
+#Form Headers
+$headers = @{
+    "Authorization" = "Bearer $accessToken"
+    "Content-Type" = "application/json"
+}
+
+# Make GET Request to Microsoft Graph API
+$uri="https://graph.microsoft.com/v1.0/users/barry.allen@persellmachucagmail.onmicrosoft.com"
+$data = Invoke-RestMethod -Method GET -Uri $uri -Headers $headers
+
+$data
+```
+![azure-runbook-get](/img/content/runbook-get.png)
+
+### Azure Logic App
+Built in connector to get user.
+
+![azure-logic-app](/img/content/logicapp-getuser.png)
