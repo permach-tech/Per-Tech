@@ -2,7 +2,7 @@
 date = '2025-09-10T02:35:11Z'
 draft = false
 title = 'Exploring Graph Explorer'
-featuredImage = '/img/graph-explorer.jpg'
+featuredImage = '/img/banners/graph-explorer.jpg'
 tags = ["Azure", "Graph API"]
 categories = ["Development"]
 summary = "An overview of Microsoft Graph explorer and their API endpoints."

@@ -103,7 +103,7 @@ theme = "DoIt"
     # URL of avatar shown in home page
     # Place your avatar file under static or assets directory
     # The filepath is relative to the static or assets directory
-    avatarURL = "/img/persell.png"
+    avatarURL = "/img/icons/persell.png"
     # URL the avatar links to
     avatarLinkURL = ""
     # DoIt CHANGED | 0.2.7 title shown in home page (HTML format is supported)

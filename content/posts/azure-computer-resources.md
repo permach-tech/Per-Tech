@@ -2,7 +2,7 @@
 date = '2025-09-23T02:57:20Z'
 draft = false
 title = 'Azure Automation Services'
-featuredImage = '/img/azure-automations.jpg'
+featuredImage = '/img/banners/azure-automations.jpg'
 tags = ["Azure", "Automation"]
 categories = ["Automation"]
 summary = "A comparison of Azure Logic Apps, Azure Functions, and Azure Runbooks for automation tasks."
