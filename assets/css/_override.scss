@@ -1,2 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Fira+Mono:400,700&display=swap&subset=latin-ext');
 $code-font-family: Fira Mono, Source Code Pro, Menlo, Consolas, Monaco, monospace;
+p {
+  margin: 0.5rem 0 !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 3rem !important;
+  margin-bottom: 1rem !important;
+}
