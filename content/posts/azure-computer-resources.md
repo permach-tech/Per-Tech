@@ -35,9 +35,50 @@ In this post, we will discuss and compare the 3 Azure Automation services: Azure
 Now let's take a simple example scenario of each service to illustrate their use cases.
 For this example we will get a user a using Microsoft Graph API.
 
-### Azure Runbook
-```powershell
+### Azure Function
 
+```powershell
+using namespace System.Net
+
+# Input bindings are passed in via param block.
+param($Request, $TriggerMetadata)
+
+# Get Access Token from Graph API
+$resourceURI = "https://graph.microsoft.com/"
+$tokenAuthURI = $env:IDENTITY_ENDPOINT + "?resource=$resourceURI&api-version=2019-08-01"
+$tokenResponse = Invoke-RestMethod -Method Get -Headers @{"X-IDENTITY-HEADER"="$env:IDENTITY_HEADER"} -Uri $tokenAuthURI
+$accessToken = $tokenResponse.access_token
+
+# Form Headers
+$headers = @{
+    "Authorization" = "Bearer $accessToken"
+    "Content-Type" = "application/json"
+}
+
+# Make GET Request to Microsoft Graph API
+$uri="https://graph.microsoft.com/v1.0/users/<userPrincipalName or id>"
+$data = Invoke-RestMethod -Method GET -Uri $uri -Headers $headers
+
+# Associate values to output bindings by calling 'Push-OutputBinding'.
+Push-OutputBinding -Name Response -Value ([HttpResponseContext]@{
+    StatusCode = [HttpStatusCode]::OK
+    Body = $data
+})
+```
+
+We will send a POST request to the function URL. And we get the user details back.
+```powershell
+Invoke-WebRequest -uri "<https://<function-app-name>.azurewebsites.net/api/<function-name>" -body $body -method POST -ContentType "application/json"
+```
+
+![azure-function](/img/content/azure_function_result.png)
+<hr>
+
+### Azure Runbook
+
+Below is a PowerShell Runbook script to get a user from Microsoft Graph API using Managed Identity:
+
+```powershell
 # Get System Assigned Managed Identity Access Token
 $url = $env:IDENTITY_ENDPOINT  
 $headers = New-Object "System.Collections.Generic.Dictionary[[String],[String]]" 
@@ -54,14 +95,25 @@ $headers = @{
 }
 
 # Make GET Request to Microsoft Graph API
-$uri="https://graph.microsoft.com/v1.0/users/barry.allen@persellmachucagmail.onmicrosoft.com"
+$uri="https://graph.microsoft.com/v1.0/users/<userPrincipalName or id>"
 $data = Invoke-RestMethod -Method GET -Uri $uri -Headers $headers
 
 $data
 ```
-![azure-runbook-get](/img/content/runbook-get.png)
+<div style="margin-top: 1em; margin-bottom: 1em;">
+  <strong>Sample Output:</strong>
+</div>
+<img src="/img/content/runbook-get.png" alt="Azure Runbook GET user result" style="max-width:100%; border:1px solid #eee; padding:4px;">
+
+<hr>
 
 ### Azure Logic App
 Built in connector to get user.
 
 ![azure-logic-app](/img/content/logicapp-getuser.png)
+
+## Conclusion
+In summary, Azure Logic Apps, Azure Functions, and Azure Runbooks are all powerful tools for automating tasks in the cloud. The choice between them depends on your specific needs and preferences.
+- If you prefer a visual, low-code approach with extensive integration options, go for Azure Logic Apps.
+- If you are comfortable with coding and need a flexible, event-driven solution, Azure Functions is the way to go.
+- If you are looking for a script-based quick start solution for managing Azure resources, then Azure Runbooks are a great choice.  
