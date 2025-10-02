@@ -8,3 +8,16 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 3rem !important;
   margin-bottom: 1rem !important;
 }
+
+p {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
+/* Add a little more space after code blocks */
+pre,
+.highlight,
+.chroma,
+figure.highlight {
+  margin-bottom: 1rem !important;
+}

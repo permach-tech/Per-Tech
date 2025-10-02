@@ -61,7 +61,7 @@ docker compose
 # You will see the docker compose help output
 ```
 
-## using Docker without sudo
+## Using Docker without sudo
 ```bash
 sudo usermod -aG docker $USER
 ```
