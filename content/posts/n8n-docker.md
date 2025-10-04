@@ -78,7 +78,12 @@ Open your web browser and navigate to `http://localhost:5678` (or replace 'local
 
 If you are using a reverse proxy like Traefik, you can reference the [documentation](https://docs.n8n.io/hosting/installation/server-setups/docker-compose/) to get that configured.
 
-The first time you navigate to your self-hosted n8n instance, you will be greeted with a welcome screen: 
+The first time you navigate to your self-hosted n8n instance, you will be greeted with a welcome screen:
+
 <img src="/img/content/n8n_welcome.png" alt="n8n-welcome" style="width:300px; border-radius:8px; display:block; margin-left:auto; margin-right:auto;" />
 
-In another post, I will showcase how to build your first workflow with n8n. Stay tuned!
+## Conclusion
+Once you are finished with the setup, you are free to start creating your first workflow.
+You can create very powerful workflows leveraging AI agents and MCP servers, you can also head over to the [community workflows](https://n8n.io/workflows/?utm_source=n8n_app&utm_medium=template_library&utm_instance=https://n8n.per-tech.org/&utm_n8n_version=1.111.1&utm_awc=1) to get some inspiration.
+
+In another post, I will showcase how to build your first workflow with n8n. Stay tuned! 
