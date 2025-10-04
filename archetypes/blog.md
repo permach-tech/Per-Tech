@@ -7,6 +7,7 @@ featuredImagePreview = "/img/banners/"
 tags = []
 categories = []
 summary = ""
+enableLastMod = false
 
 toc = true
 comments = true
