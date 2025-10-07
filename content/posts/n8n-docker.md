@@ -1,5 +1,5 @@
 +++
-date = '2025-10-01T02:57:20Z'
+date = '2025-09-28T02:57:20Z'
 draft = false
 title = 'n8n self-hosted automation at the palm of your hand'
 featuredImage = '/img/banners/n8n+docker.png'

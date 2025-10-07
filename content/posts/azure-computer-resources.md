@@ -1,5 +1,5 @@
 +++
-date = '2025-09-23T02:57:20Z'
+date = '2025-09-12T02:57:20Z'
 draft = false
 title = 'Azure Automation Services'
 featuredImage = '/img/banners/azure-automations.jpg'

@@ -1,5 +1,5 @@
 +++
-date = '2025-09-30T02:57:20Z'
+date = '2025-09-20T02:57:20Z'
 draft = false
 title = 'Docker and Docker Compose Installation on Ubuntu'
 featuredImage = '/img/banners/docker.png'
