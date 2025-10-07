@@ -37,9 +37,10 @@ You can find the permissions for your endpoint in the **Modify permissions** sec
 
 ## Example Queries
 
+### GET
 To GET a list of Microsoft users in your tenant, you can use the following query:
 
-```GET
+```HTTP
 https://graph.microsoft.com/v1.0/users
 ```
 Now depending on how many users are in your tenant, you may not have seen all of them. Microsoft graph returns 100 users by default. So what if we wanted to see more at a time? (As well as reduce the number of requests we make?)
@@ -47,16 +48,82 @@ Now depending on how many users are in your tenant, you may not have seen all of
 
 To do this, we can use the `$top` query parameter to specify the number of users we want to retrieve in a single request. For example, to get 200 users(max 999), we can modify our query like this:
 
-```GET
+```HTTP
 https://graph.microsoft.com/v1.0/users?$top=200
 ```
+
+By default, Graph API returns a set list of properties for each user. This is where we can introduce the `$select` query parameter to specify which properties we want to retrieve. For example, to get the id, displayName, and userPrincipalName of each user, we can modify our query like this:
+
+```HTTP
+https://graph.microsoft.com/v1.0/users?$select=id,displayName,userPrincipalName 
+```
+
+### PATCH
+
+Suppose we want to update a user's office location. For example, Clark Kent's current office location is `null`:
+
+<img src="/img/content/clark_kent.png" alt="Clark Kent user details" style="width:300px; border-radius:8px; display:block;" />
+
+To update the office location, use the following PATCH request:
+
+```http
+PATCH https://graph.microsoft.com/v1.0/users/clark.kent@domain.com
+Content-Type: application/json
+
+{
+  "officeLocation": "Metropolis"
+}
+```
+
+You will receive a `200 OK` response, indicating the update was successful. You can verify the change by performing a GET request on the user.
+
+<img src="/img/content/clark_kent_patch.png" alt="Clark Kent PATCH" style="width:300px; border-radius:8px; display:block;" />
+
+
+### POST
+Post requests are commonly used to create new resources such as creating a user or group or assigning resources such as assigning a license or a role to a user.
+
+For example, to create a new user, you can use the following POST request:
+
+```http
+POST https://graph.microsoft.com/v1.0/users
+Content-Type: application/json
+
+{
+  "accountEnabled": true,
+  "displayName": "Hal Jordan",
+  "mailNickname": "hal.jordan",
+  "userPrincipalName": "hal.jordan@domain.com",
+  "passwordProfile": {
+    "forceChangePasswordNextSignIn": true,
+    "password": "InDarkestD@YInBl@ckestN1ight"
+  }
+}
+```
+
+You will receive a `201 Created` response, indicating the user was successfully created.
+
+<img src="/img/content/hal_jordan_create.png" alt="Hal Jordan POST" style="width:300px; border-radius:8px; display:block;" />
+
+### DELETE
+DELETE requests are pretty self-explanatory. They are used to remove resources. For example, to delete the user we just created, you can use the following DELETE request:
+
+```http
+DELETE https://graph.microsoft.com/v1.0/users/hal.jordan@domain.com
+```
+
+You will receive a `204 No Content` response, indicating the user was successfully deleted.
+
+> [!CAUTION]
+> Please be careful when using DELETE requests, as some changes can be permanent.
+
 
 ## Conclusion
 
 Graph Explorer is an essential tool for anyone working with Microsoft Graph. It simplifies learning, testing, and troubleshooting API requests, making it easier to integrate Microsoft 365 data and services into your applications.
 
 ## Resources
-I reference the Microsoft Graph API documentation quite frequently, because who is going to remember all these endpoints?
+I reference the Microsoft Graph API documentation quite frequently (because that would be a lot of endpoints to memorize!)
 
 [Microsoft Graph REST API Docs](https://learn.microsoft.com/en-us/graph/api/overview?view=graph-rest-1.0)
 
